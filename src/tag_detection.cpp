@@ -76,7 +76,8 @@ TagDetection::~TagDetection(){
 
 
 void TagDetection::cameraCallback(const sensor_msgs::ImageConstPtr& img_msg){
-    std::cout << "hello" << std::endl;
+    std::cout << "size: " << img_msg->width << "x" << img_msg->height << std::endl;
+    ros::Time ts1 = ros::Time::now();
     color_image_ = cv_bridge::toCvShare(img_msg, sensor_msgs::image_encodings::BGR8)->image;
     cv::cvtColor(color_image_, grayscale_image_, cv::COLOR_BGR2GRAY);   
 
@@ -114,16 +115,29 @@ void TagDetection::cameraCallback(const sensor_msgs::ImageConstPtr& img_msg){
         cv::line(color_image_, corner_vec[2], corner_vec[3], CV_RGB(0, 0, 255), 2);
         cv::line(color_image_, corner_vec[3], corner_vec[0], CV_RGB(255, 0, 255), 2);
  
-        // det_info_.det = det;
-        // det_info_.tagsize = tag_size_;
-        // det_info_.fx = fx_;
-        // det_info_.fy = fy_;
-        // det_info_.cx = cx_;
-        // det_info_.cy = cy_;
+        det_info_.det = det;
+        det_info_.tagsize = tag_size_;
+        det_info_.fx = fx_;
+        det_info_.fy = fy_;
+        det_info_.cx = cx_;
+        det_info_.cy = cy_;
+
+        // LINKING PROBLEM
+        // Then call estimate_tag_pose.
+        // apriltag_pose_t pose1, pose2;
+        // double err1, err2;
+        // int n_iter = 10;
+        // estimate_tag_pose_orthogonal_iteration(&det_info_, &err1, &pose1, &err2, &pose2, n_iter);
+
+        // apriltag_pose_t pose;
+        // double err = estimate_tag_pose(&det_info_, &pose);
+
+
 
         // Do something with det here
         tag_array_msg.tag_array.push_back(tag_msg);
     }
+    std::cout << "Total camera callback ts: " << (ros::Time::now() - ts1).toSec() * 1000 << " ms" << std::endl;
     
     tag_array_pub_.publish(tag_array_msg);
 

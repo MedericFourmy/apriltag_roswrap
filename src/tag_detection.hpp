@@ -19,27 +19,20 @@
 #include "apriltag_roswrap/Tag.h"
 #include "apriltag_roswrap/TagArray.h"
 
-// April tags
-// #include "common/homography.h"
-// #include "common/zarray.h"
-// Apriltag
 #include <apriltag.h>
+#include <apriltag_pose.h>
 
-// #include <tag16h5.h>
-// #include <tag25h9.h>
+#include <tag16h5.h>
+#include <tag25h9.h>
 #include <tag36h11.h>
-// #include <tagCircle21h7.h>
-// #include <tagCircle49h12.h>
-// #include <tagCustom48h12.h>
-// #include <tagStandard41h12.h>
-// #include <tagStandard52h13.h>
-
-// #include "base/processor/ippe.h"
-
+#include <tagCircle21h7.h>
+#include <tagCircle49h12.h>
+#include <tagCustom48h12.h>
+#include <tagStandard41h12.h>
+#include <tagStandard52h13.h>
 
 // open cv
-// #include <opencv/cv.h>
-// #include <opencv2/imgproc/imgproc.hpp>
+#include <opencv/cv.h>
 #include <cv_bridge/cv_bridge.h>
 // #include <opencv2/core/eigen.hpp>
 
@@ -66,7 +59,7 @@ class TagDetection
 
         apriltag_detector_t *detector_;
         apriltag_family_t *tag_family_;
-        // apriltag_detection_info_t det_info_;  // missing includes?
+        apriltag_detection_info_t det_info_;  // missing includes?
 
         double fx_;
         double fy_;
