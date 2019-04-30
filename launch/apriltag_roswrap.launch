@@ -1,0 +1,5 @@
+<launch>
+    <node name="apriltag_roswrap" pkg="apriltag_roswrap" type="tag_detection_node" output="screen">
+        <rosparam command="load" file="$(find apriltag_roswrap)/config/params.yaml" />
+    </node>
+</launch>

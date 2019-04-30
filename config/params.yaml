@@ -1,0 +1,13 @@
+camera_image_topic: /camera_simu/image_raw
+detection_topic: /camera_simu/detections
+camera_ros_buffer_size: 20
+fx: 42
+fy: 42
+cx: 42
+cy: 42
+tag_family: "tag36h11"
+quad_decimate: 2 # doing quad detection at lower resolution to speed things up (see end of file)
+quad_sigma: 1.65 # gaussian blur good for noisy images, may be recommended with quad_decimate. Kernel size adapted (see end of this file) 
+nthreads: 8
+debug: false
+refine_edges: false
