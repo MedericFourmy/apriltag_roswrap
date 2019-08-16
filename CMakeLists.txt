@@ -28,11 +28,19 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   image_transport
   std_msgs
-  tf
+  tf 
   cv_bridge
   tf_conversions
-  OpenCV
+#   OpenCV
 )
+
+# Hack if OpenCV install is fishy
+find_package(OpenCV REQUIRED
+   NO_MODULE #Should be optional, tells CMake to use config mode
+   PATHS /usr/local # Tells CMake to look here
+   NO_DEFAULT_PATH #and don't look anywhere else
+)
+
 
 # Other dependencies
 find_package(eigen_conversions REQUIRED)

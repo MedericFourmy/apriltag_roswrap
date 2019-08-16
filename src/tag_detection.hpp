@@ -22,19 +22,31 @@
 #include <apriltag.h>
 #include <apriltag_pose.h>
 
-#include <tag16h5.h>
 #include <tag25h9.h>
 #include <tag36h11.h>
-#include <tagCircle21h7.h>
-#include <tagCircle49h12.h>
-#include <tagCustom48h12.h>
-#include <tagStandard41h12.h>
-#include <tagStandard52h13.h>
 
-// open cv
+// TODO: define in CMakeList.txt
+#define APRILTAGV 3
+
+#if APRILTAGV == 2
+    #include <tag36h10.h>
+    #include <tag36artoolkit.h>
+    #include <tag25h7.h>
+#elif APRILTAGV == 3
+    #include <tag16h5.h>
+    #include <tagCircle21h7.h>
+    #include <tagCircle49h12.h>
+    #include <tagCustom48h12.h>
+    #include <tagStandard41h12.h>
+    #include <tagStandard52h13.h>
+#endif
+
+
 #include <opencv/cv.h>
 #include <cv_bridge/cv_bridge.h>
 // #include <opencv2/core/eigen.hpp>
+#include <Eigen/Dense>
+
 
 
 class TagDetection
@@ -72,6 +84,7 @@ class TagDetection
         int nthreads_;
         bool debug_;
         bool refine_edges_;
+        int tag_black_border_;
 
         cv::Mat color_image_;
         cv::Mat grayscale_image_;

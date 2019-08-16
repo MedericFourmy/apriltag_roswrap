@@ -1,14 +1,60 @@
-# camera_image_topic: /camera_simu/image_raw  # simu
-camera_image_topic: /iri_mvbluefox3_camera/camera/image_rect  # IRI
-detection_topic: /camera_simu/detections
+camera_image_topic: /camera_simu/image_raw  # simu
+# camera_image_topic: /cv_camera/image_raw # IRI logitech
+# camera_image_topic: /iri_mvbluefox3_camera/camera/image_raw # mvbluefox
+# camera_image_topic: /camera/image_rect_sync  # synchronized setups
+# camera_image_topic: /iri_mvbluefox3_camera/camera/image_rect  # IRI
+detection_topic: /detections
+tag_array_topic: /tag_array
 camera_ros_buffer_size: 20
-fx: 42
-fy: 42
-cx: 42
-cy: 42
+fx: 320
+fy: 320
+cx: 320
+cy: 240
+tag_size: 0.2
 tag_family: "tag36h11"
-quad_decimate: 3   # doing quad detection at lower resolution to speed things up (see end of file)
-quad_sigma: 1.65 # gaussian blur good for noisy images, may be recommended with quad_decimate. Kernel size adapted (see end of this file) 
+quad_decimate: 1.0  # doing quad detection at lower resolution to speed things up (see end of file)
+quad_sigma: 0 # gaussian blur good for noisy images, may be recommended with quad_decimate. Kernel size adapted (see end of this file) 
 nthreads: 8
 debug: false
-refine_edges: false
+refine_edges: 1  # always keep 1
+# for apriltag 2 only
+tag_black_border: 1
+
+
+###############
+# Apriltag settings
+###############
+# int nthreads;
+# How many threads should be used?
+
+# float quad_decimate;
+# detection of quads can be done on a lower-resolution image,
+# improving speed at a cost of pose accuracy and a slight
+# decrease in detection rate. Decoding the binary payload is
+# still done at full resolution. .
+# ! Special optimized value of 1.5
+
+# float quad_sigma;
+# What Gaussian blur should be applied to the segmented image
+# (used for quad detection?)  Parameter is the standard deviation
+# in pixels.  Very noisy images benefit from non-zero values
+# (e.g. 0.8).
+
+# int refine_edges;
+# When non-zero, the edges of the each quad are adjusted to "snap
+# to" strong gradients nearby. This is useful when decimation is
+# employed, as it can increase the quality of the initial quad
+# estimate substantially. Generally recommended to be on (1).
+# Very computationally inexpensive. Option is ignored if
+# quad_decimate = 1.
+
+# double decode_sharpening;
+# How much sharpening should be done to decoded images? This
+# can help decode small tags but may or may not help in odd
+# lighting conditions or low light conditions.
+# The default value is 0.25.
+
+# int debug;
+# When non-zero, write a variety of debugging images to the
+# current working directory at various stages through the
+# detection process. (Somewhat slow).
