@@ -1,4 +1,6 @@
 camera_image_topic: /camera_simu/image_raw  # simu
+#camera_image_topic: /rgbd/rgb/image_raw  # rgbd talos
+# camera_image_topic: /usb_cam/image_raw  # webcam
 # camera_image_topic: /cv_camera/image_raw # IRI logitech
 # camera_image_topic: /iri_mvbluefox3_camera/camera/image_raw # mvbluefox
 # camera_image_topic: /camera/image_rect_sync  # synchronized setups

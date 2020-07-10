@@ -115,9 +115,9 @@ void TagDetection::cameraCallback(const sensor_msgs::ImageConstPtr& img_msg){
     apriltag_roswrap::TagArray tag_array_msg;
 
     for (int i = 0; i < zarray_size(detections); i++) {
-        std::cout << "detection " << i << std::endl;
         apriltag_detection_t *det;
         zarray_get(detections, i, &det);
+        std::cout << "ID: " << det->id << std::endl;
 
         // create a tag ros msg and fill it 
         apriltag_roswrap::Tag tag_msg; 
